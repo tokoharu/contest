@@ -1,0 +1,101 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "dependsOn": [
+                "buildgpp"
+            ],
+            "label": "atcoder-test",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "/c/workspace/contest/atcoder-tools/atcoder-tools",
+                "test"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "buildgpp",
+            "type": "shell",
+            "command": "C:/MinGW/bin/g++",
+            "args": [
+                "-std=c++14",
+                "-g",
+                "-pedantic",
+                "-Wcast-align",
+                "-Wcast-qual",
+                "-Wconversion",
+                "-Wdisabled-optimization",
+                "-Wendif-labels",
+                "-Wfloat-equal",
+                "-Winit-self",
+                "-Winline",
+                "-Wlogical-op",
+                "-Wmissing-include-dirs",
+                "-Wnon-virtual-dtor",
+                "-Wold-style-cast",
+                "-Woverloaded-virtual",
+                "-Wpacked",
+                "-Wpointer-arith",
+                "-Wredundant-decls",
+                "-Wshadow",
+                "-Wsign-promo",
+                "-Wswitch-default",
+                "-Wswitch-enum",
+                "-Wunsafe-loop-optimizations",
+                "-Wvariadic-macros",
+                "-Wwrite-strings",
+                "-Waddress",
+                "-Warray-bounds",
+                "-Wc++11-compat",
+                "-Wchar-subscripts",
+                "-Wenum-compare",
+                "-Wcomment",
+                "-Wmaybe-uninitialized",
+                "-Wmissing-braces",
+                "-Wnonnull",
+                "-Wparentheses",
+                "-Wreorder",
+                "-Wreturn-type",
+                "-Wsequence-point",
+                "-Wsign-compare",
+                "-Wstrict-aliasing",
+                "-Wstrict-overflow=1",
+                "-Wswitch-enum",
+                "-Wtrigraphs",
+                "-Wuninitialized",
+                "-Wunknown-pragmas",
+                "-Wunused-function",
+                "-Wunused-label",
+                "-Wunused-value",
+                "-Wunused-variable",
+                "-Wvolatile-register-var",
+                "-Wclobbered",
+                "-Wempty-body",
+                "-Wignored-qualifiers",
+                "-Wmissing-field-initializers",
+                "-Wsign-compare",
+                "-Wtype-limits",
+                "-Wuninitialized",
+                "-Wunused-parameter",
+                "-Wunused-but-set-parameter",
+                "-Wredundant-decls",
+                "-O2",
+                "${fileBasename}",
+                "-o",
+                "${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+        },
+    ]
+}
