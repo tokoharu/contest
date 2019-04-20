@@ -30,6 +30,10 @@ ostream& operator<<(ostream& os, const mint<kind>& x) {
 }
 
 template <int kind>
+bool operator==(mint<kind>& a, mint<kind> b) {
+  return a.v == b.v;
+}
+template <int kind>
 mint<kind>& operator+=(mint<kind>& a, mint<kind> b) {
   return a = a.v + b.v;
 }

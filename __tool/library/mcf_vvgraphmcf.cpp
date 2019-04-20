@@ -1,8 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-//#define MAX_V 1000
-// int INF = (int)1e6;
-// int V;
 
 typedef pair<int, int> PII;
 struct edge {
@@ -84,10 +81,11 @@ class Graph {
     return res;
   }
 };
-
+/*
 int main() {
   Graph graph(6);
   graph.add_edge(1, 2, 3, 4);
   graph.add_edge(2, 4, 4, 2);
   cout << graph.min_cost_flow(1, 4, 2) << endl;
 }
+*/
