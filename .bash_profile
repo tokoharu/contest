@@ -2,7 +2,7 @@
 export PATH=$PATH:/c/MinGW/bin
 alias python3='python'
 
-TOOL=/c/workspace/contest/atcoder-tools/atcodertools/atcoder_tools.py
+ATCODER_TOOLS=/c/workspace/contest/atcoder-tools/atcodertools/atcoder_tools.py
 function atcoder-gen (){
 	CONTEST=$@
 	TASK=${CONTEST//-/_}
