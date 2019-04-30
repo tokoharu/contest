@@ -21,6 +21,7 @@ def main():
                 continue
             with open(curDir + os.sep + filename, "r", encoding="utf-8") as stream:
                 data = stream.readlines()
+            # print(filename)
             name1, name2 = filename.split(".")[0].split("_")
 
             code = ""
