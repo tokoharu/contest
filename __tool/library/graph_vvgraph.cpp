@@ -41,15 +41,15 @@ class Graph {
     }
   }
 
-  void build_tree(int root,
-                  function<void(Vertex<TV, TE>&, Vertex<TV, TE>&)> func =
-                      [](Vertex<TV, TE>& parent, Vertex<TV, TE>& child) {
-                        if (parent.id == -1) {
-                          child.depth = 0;
-                          return;
-                        }
-                        child.depth = parent.depth + 1;
-                      }) {
+  void build_tree(
+      int root, function<void(Vertex<TV, TE>&, Vertex<TV, TE>&)> func =
+                    [](Vertex<TV, TE>& parent, Vertex<TV, TE>& child) {
+                      if (parent.id == -1) {
+                        child.depth = 0;
+                        return;
+                      }
+                      child.depth = parent.depth + 1;
+                    }) {
     Vertex<TV, TE> dummy(-1);
     this->root = root;
     func(dummy, vs[root]);
@@ -72,6 +72,27 @@ class Graph {
     }
   }
 
+  vector<LL> dijkstra(int s) {
+    LL INF = (1LL << 60);
+    priority_queue<PII, vector<PII>, greater<PII>> que;
+    vector<LL> d(N, INF);
+    d[s] = 0;
+    que.push(PII(0, s));
+    while (!que.empty()) {
+      PII p = que.top();
+      que.pop();
+      int v = p.second;
+      if (d[v] < p.first) continue;
+
+      for (auto e : vs[v].es) {
+        if (d[e.to] > d[v] + e.field.cost) {
+          d[e.to] = d[v] + e.field.cost;
+          que.push(PII(d[e.to], e.to));
+        }
+      }
+    }
+    return d;
+  }
   /*
   葉からの順番を取得。
   */
@@ -93,7 +114,7 @@ class Graph {
   }
 
   /*
-    update : (parent, child) -> void
+    update : (T parent, vector<T> child, Vertex parent) -> void
   */
 
   template <typename T>
@@ -170,7 +191,13 @@ class Graph {
 
   /*
   // example of update-all-direction.
-  
+
+  struct TV {};
+  struct TE {
+    int w;
+  };
+
+
   struct DP {
     LL dist;
     LL flip;
@@ -190,5 +217,23 @@ class Graph {
         dp.dist += out.field.weight;
         if (out.to != out.field.to) dp.flip++;
       };
+
+  int N;
+  cin >> N;
+  Graph graph(N);
+  for(int i=0; i<N-1; i++) {
+    int v, u;
+    cin >> v >> u;
+    TE e;
+    graph.add_edge(v, u, e);
+  }
+
+  auto results = graph.update_all(dp_init, dp_eval, dp_finalize);
+  for (auto vec : results) {
+    DP base;
+    base.ans = 1;
+    for (auto val : vec) base = dp_eval(base, val);
+    cout << base.ans << endl;
+  }
   */
 };

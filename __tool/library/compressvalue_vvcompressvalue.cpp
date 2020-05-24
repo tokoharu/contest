@@ -9,6 +9,7 @@ class CompressingValues {
  public:
   CompressingValues(vector<LL> data) {
     sort(data.begin(), data.end());
+    data.erase(unique(data.begin(), data.end()), data.end());
     restration.resize(data.size());
     for (int i = 0; i < data.size(); i++) {
       mapping[data[i]] = i;
