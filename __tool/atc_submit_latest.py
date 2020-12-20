@@ -27,34 +27,27 @@ def main(prog, args):
         formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument("contest", help="contest name")
-    print("hoge")
     args = parser.parse_args(args)
 
-    wd = os.path.join(expanduser("~/../.."), "workspace",
-                      "contest", args.contest)
+    wd = os.path.join(expanduser("./../"), args.contest)
     latest_code = latest_path(wd)
     with open(latest_code, 'r', encoding="utf-8") as f:
         code = f.read()
 
     os.chdir(os.path.dirname(latest_code))
-    # print(latest_code)
 
     case_pattern_match = re.search(
         ".*test[\s]*case[\s]*([0-9]+).*", code, re.MULTILINE)
     if case_pattern_match:
         case = case_pattern_match.group(1)
         os.system(
-            "g++ main.cpp -std=c++14 && atcoder-tools test --num {}"
+            "g++ main.cpp -std=c++14 -I ~/repository/ac-library/ && atcoder-tools test --num {}"
             .format(case)
         )
     else:
         print(os.getcwd())
-        tool_path = os.path.join(
-            expanduser("~/../..").replace("/", os.sep),
-            "workspace",
-            "contest", "atcoder-tools", "atcodertools", "atcoder_tools.py")
         os.system(
-            "g++ main.cpp -std=c++14 && python {} submit".format(tool_path))
+            "g++ main.cpp -std=c++14 -I ~/repository/ac-library/ && atcoder-tools submit")
 
 
 if __name__ == "__main__":

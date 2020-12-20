@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
 using namespace std;
+using namespace atcoder;
 typedef long long LL;
 typedef pair<LL,LL> PII;
 
@@ -30,34 +32,6 @@ function<T(T, T)> op_min = [](T a, T b) -> T { return min(a, b); };
 template <typename T>
 function<T(T, T)> op_sum = [](T a, T b) -> T { return a + b; };
 
-namespace detail {
-template <typename T, std::size_t NDIMS>
-struct vector_builder {
-  using type = std::vector<typename vector_builder<T, NDIMS - 1>::type>;
-
-  static type make(std::vector<std::size_t> dims, const T& v = {}) {
-    const auto vec = std::vector<T>(dims.empty() ? 0 : dims.back(), v);
-    if (!dims.empty()) dims.pop_back();
-    return vector_builder<std::vector<T>, NDIMS - 1>::make(dims, vec);
-  }
-};
-
-template <typename T>
-struct vector_builder<T, 1> {
-  using type = std::vector<T>;
-
-  static type make(std::vector<std::size_t> dims, const T& v = {}) {
-    return type(dims.empty() ? 0 : dims.back(), v);
-  }
-};
-}  // namespace detail
-
-template <typename T, typename... SIZE_T>
-auto exvector(const T& v, SIZE_T... dims) {
-  static_assert(sizeof...(dims) != 0, "invalid dimension");
-  std::vector<std::size_t> vec_dims{dims...};
-  return detail::vector_builder<T, sizeof...(dims)>::make(vec_dims, v);
-}
 
 using namespace std;
 //********************  dumps ************************//
