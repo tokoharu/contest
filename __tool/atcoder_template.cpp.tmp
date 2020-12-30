@@ -74,7 +74,7 @@ void dump(const T& data) {  // T : data, U = base type val.
 ///////////////////////////////////////////////
 
 {% if mod %}
-const long long MOD = {{ mod }};
+using mint = static_modint<{{ mod }}>;
 {% endif %}
 {% if yes_str %}
 const string YES = "{{ yes_str }}";
