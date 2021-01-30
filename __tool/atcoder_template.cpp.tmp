@@ -5,24 +5,7 @@ using namespace atcoder;
 typedef long long LL;
 typedef pair<LL,LL> PII;
 
-
-// chmax, chmin
-template <class T>
-inline bool chmax(T& a, T b) {
-  if (a < b) {
-    a = b;
-    return 1;
-  }
-  return 0;
-}
-template <class T>
-inline bool chmin(T& a, T b) {
-  if (a > b) {
-    a = b;
-    return 1;
-  }
-  return 0;
-}
+const long double pi = acos(-1.0);
 
 template <typename T>
 function<T(T, T)> op_max = [](T a, T b) -> T { return max(a, b); };
@@ -33,44 +16,40 @@ template <typename T>
 function<T(T, T)> op_sum = [](T a, T b) -> T { return a + b; };
 
 
-using namespace std;
-//********************  dumps ************************//
+template<int T> inline std::ostream& operator<<(std::ostream& os, static_modint<T> val) {cout << val.val(); return os;}
+template<typename T, typename S> inline std::ostream& operator<<(std::ostream& os, const std::pair<T, S> p) { std::cout << "[" << p.first << ";" << p.second << "]"; return os; }
+template<typename T, typename S> inline std::ostream& operator<<(std::ostream& os, const std::map<T, S> p) { for (auto el : p) std::cout << "[" << el.first << ";" << el.second << "]"; return os; }
+template<typename T, typename S> inline std::ostream& operator<<(std::ostream& os, const std::unordered_map<T, S> p) { for (auto el : p) std::cout << "[" << el.first << ";" << el.second << "]"; return os; }
+template<typename T> inline std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) { for (auto el : v) std::cout << el << " "; return os; }
+template<typename T> inline std::ostream& operator<<(std::ostream& os, const std::vector<std::vector<T>>& v) { for (auto el : v) std::cout << el << "\n"; return os; }
+template<typename T> inline std::ostream& operator<<(std::ostream& os, const std::deque<T>& v) { for (auto el : v) std::cout << el << " "; return os; }
+template<typename T> inline std::ostream& operator<<(std::ostream& os, const std::queue<T>& v) { for (auto el : v) std::cout << el << " "; return os; }
+template<typename T> inline std::ostream& operator<<(std::ostream& os, const std::stack<T>& v) { for (auto el : v) std::cout << el << " "; return os; }
+template<typename T> inline std::ostream& operator<<(std::ostream& os, const std::set<T>& v) { for (auto el : v) std::cout << el << " "; return os; }
+template<typename T> inline std::ostream& operator<<(std::ostream& os, const std::multiset<T>& v) { for (auto el : v) std::cout << el << " "; return os; }
+template<typename T> inline std::istream& operator>>(std::istream&is, std::vector<T> &vec) {for (T &x : vec) is >> x;return is;}
+template<typename T> inline std::vector<T> fetch_vec(int sz) { std::vector<T> ret(sz); for (auto& elem : ret) std::cin >> elem; return ret; }
+template<class T> inline bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
+template<class T> inline bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 
-template <typename T>
-void dump(const T& data, vector<int>& iter) {
-  cout << data << " ";
+
+//********************  vec_formatter ************************//
+
+template<typename T> 
+inline vector<pair<T, int>> get_vec_enum(vector<T> &vec) {
+  vector<pair<T, int>> ret;
+  for(int i=0; i<vec.size(); i++) ret.push_back(make_pair(vec[i], i));
+  return ret;
 }
-template <typename T>
-void dump(const vector<T>& data, vector<int>& iter) {
-  for (auto elem : data) dump(elem, iter);
-  cout << endl;
+template<typename T, typename U>
+inline vector<pair<T,U>> get_vec_zip(vector<T> &vec1, vector<U>& vec2) {
+  vector<pair<T, U>> ret;
+  for(int i=0; i<min(vec1.size(), vec2.size()); i++) {
+    ret.push_back(make_pair(vec1[i], vec2[i]));
+  }
+  return ret;
 }
 
-template <typename T>
-void dump(const vector<vector<T>>& data, vector<int>& iter) {
-  for (auto elem : iter) {
-    cout << "[" << elem << "]";
-  }
-  cout << endl;
-  for (int i = 0; i < data.size(); i++) {
-    iter.push_back(i);
-    dump(data[i], iter);
-    iter.pop_back();
-  }
-  cout << endl;
-}
-
-template <typename T>
-void dump(const vector<T>& data, int dummy) {
-  for (int i = 0; i < data.size(); i++) {
-    cout << "[" << i << "] " << data[i] << endl;
-  }
-}
-template <typename T>
-void dump(const T& data) {  // T : data, U = base type val.
-  vector<int> iter;
-  dump(data, iter);
-}
 ///////////////////////////////////////////////
 
 {% if mod %}
