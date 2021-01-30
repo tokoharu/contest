@@ -1,10 +1,21 @@
 
-/**
- * 出典 :
- * http://noshi91.hatenablog.com/entry/2018/12/28/210907#comment-17680117127061434756
- * K値のみからなる転倒数の数え上げを効率的にできる型
- * 群構造になっているため、BITに適用可能
- */
+
+// 普通の転倒数数え上げ
+LL inversion_counting() {
+  fenwick_tree<LL> fw(N+5);
+  LL inv = 0;
+  for(int i=0; i<N; i++) {
+    LL q = fw.sum(a[i], N+1);
+    inv += q;
+    fw.add(a[i], 1);
+  }
+}
+
+//  出典 :
+//  http://noshi91.hatenablog.com/entry/2018/12/28/210907#comment-17680117127061434756
+//  K値のみからなる転倒数の数え上げを効率的にできる型
+//  群構造になっているため、BITに適用可能
+// 
 template <int K>
 class InversionCountingValueK {
  public:

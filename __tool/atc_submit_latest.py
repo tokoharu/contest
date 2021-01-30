@@ -41,13 +41,13 @@ def main(prog, args):
     if case_pattern_match:
         case = case_pattern_match.group(1)
         os.system(
-            "g++ main.cpp -std=c++14 -I ~/repository/ac-library/ && atcoder-tools test --num {}"
+            "g++ main.cpp -std=gnu++17 -I ~/repository/ac-library/ && atcoder-tools test --num {}"
             .format(case)
         )
     else:
         print(os.getcwd())
         os.system(
-            "g++ main.cpp -std=c++14 -I ~/repository/ac-library/ && atcoder-tools submit")
+            "g++ main.cpp -std=gnu++17 -I ~/repository/ac-library/ && atcoder-tools submit -r 19638160")
 
 
 if __name__ == "__main__":
