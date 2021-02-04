@@ -1,11 +1,11 @@
 
-template <int size = 400000, long long param = MOD_CONST, bool preserve = false>
+template <int size = 2000000, bool preserve = false>
 class CombinationTool {
-  vector<mint<param>> invs;
+  vector<mint> invs;
 
  public:
-  vector<mint<param>> kaijo;
-  vector<vector<mint<param>>> table;
+  vector<mint> kaijo;
+  vector<vector<mint>> table;
 
   CombinationTool() {
     int N = size;
@@ -27,13 +27,13 @@ class CombinationTool {
       invs[0] = 1;
       for (int i = 1; i < N + 5; i++) {
         kaijo[i] = kaijo[i - 1] * i;
-        invs[i] = mint<param>(1) / kaijo[i];
+        invs[i] = mint(1) / kaijo[i];
       }
     }
   }
 
-  mint<param> get(int n, int m) {
-    if (m < 0 || m > n) return mint<param>(0);
+  mint get(int n, int m) {
+    if (m < 0 || m > n) return mint(0);
     if (preserve) return table[n][m];
     return kaijo[n] * invs[m] * invs[n - m];
   }

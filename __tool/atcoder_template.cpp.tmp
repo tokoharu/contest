@@ -15,6 +15,14 @@ function<T(T, T)> op_min = [](T a, T b) -> T { return min(a, b); };
 template <typename T>
 function<T(T, T)> op_sum = [](T a, T b) -> T { return a + b; };
 
+LL INF_BASE = 1e18;
+LL op_min_func(LL a, LL b) {return min(a, b);}
+LL op_max_func(LL a, LL b) {return max(a, b);}
+LL get_pINF() {return INF_BASE;}
+LL get_nINF() {return -INF_BASE;}
+using RMinQ = segtree<LL, op_min_func, get_pINF>;
+using RMaxQ = segtree<LL, op_max_func, get_nINF>;
+
 
 template<int T> inline std::ostream& operator<<(std::ostream& os, static_modint<T> val) {cout << val.val(); return os;}
 template<typename T, typename S> inline std::ostream& operator<<(std::ostream& os, const std::pair<T, S> p) { std::cout << "[" << p.first << ";" << p.second << "]"; return os; }
