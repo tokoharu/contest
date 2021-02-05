@@ -24,6 +24,7 @@ using RMinQ = segtree<LL, op_min_func, get_pINF>;
 using RMaxQ = segtree<LL, op_max_func, get_nINF>;
 
 
+template<int T> inline std::ostream& operator<<(std::ostream& os, dynamic_modint<T> val) {cout << val.val(); return os;}
 template<int T> inline std::ostream& operator<<(std::ostream& os, static_modint<T> val) {cout << val.val(); return os;}
 template<typename T, typename S> inline std::ostream& operator<<(std::ostream& os, const std::pair<T, S> p) { std::cout << "[" << p.first << ";" << p.second << "]"; return os; }
 template<typename T, typename S> inline std::ostream& operator<<(std::ostream& os, const std::map<T, S> p) { for (auto el : p) std::cout << "[" << el.first << ";" << el.second << "]"; return os; }
