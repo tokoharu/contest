@@ -40,16 +40,16 @@ public:
   }
 
   template <class F_>
-  friend auto memoized(F_ &&);
+  friend auto memorized(F_ &&);
 };
 
 template<class F_>
-auto memoized(F_ &&func) {
+auto memorized(F_ &&func) {
     return memo_impl<F_>(std::forward<F_>(func));
 }
 
 //  ex : 
-  // auto fib = memoized(
+  // auto fib = memorized(
   //     [&](auto &&fib, int n) -> u32 {
   //       if (n <= 1) {
   //         return 1;
