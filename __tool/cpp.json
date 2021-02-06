@@ -1,45 +1,56 @@
 {
-    "coutendl": {
+	"coutendl": {
 		"prefix": "output",
 		"body": [
-			"cout << $1 <<endl;"
+			"cout << $1 <<endl;",
+			""
+		]
+	},
+	"coutendl2": {
+		"prefix": "outputt",
+		"body": [
+			"cout << (($1) ? ${2:YES}: ${3:NO}) <<endl;",
+			""
 		]
 	},
 	"fortemp": {
-		"prefix": "forvobj",
+		"prefix": "fv",
 		"body": [
-			"for (int $1 = 0; $1 < $2.size(); $1++) {",
-			"\tauto& $3 = $2[$1];",
+			"for (int ${2:i} = 0; $2 < $1.size(); $2++) {",
+			"\tauto& ${3:tmp} = $1[$2];",
+			"\t",
 			"}"
 		]
 	},
 	"forN": {
-		"prefix": "forvn",
+		"prefix": "fn",
 		"body": [
-			"for (int $1 = 0; $1 < $2; $1++) {",
+			"for (int ${1:i} = 0; $1 < ${2:n}; $1++) {",
 			"\t",
 			"}"
 		]
 	},
 	"forRev": {
-		"prefix": "forvrev",
+		"prefix": "fnr",
 		"body": [
-			"for (int $1 = $2; $1 >= 0; $1--) {",
-			"\t",
+			"for (int ${1:i} = $2; $1 >= 0; $1--) {",
+			"\t$3",
 			"}"
 		]
 	},
 	"sortall": {
-		"prefix": "sortvecobj",
+		"prefix": ["sv", "sort"],
 		"body": [
-			"sort($1.begin(), $1.end());"
+			"sort($1.begin(), $1.end());",
+			""
 		]
 	},
 	"sortrev": {
-		"prefix": "sortvecrev",
+		"prefix": ["svr", "sortrev"],
 		"body": [
 			"sort($1.begin(), $1.end());",
-			"reverse($1.begin(), $1.end());"
+			"reverse($1.begin(), $1.end());",
+			""
 		]
 	},
 	"forall": {
@@ -55,18 +66,20 @@
 		]
 	},
 	"count": {
-		"prefix": "count_",
+		"prefix": ["count_", "countx"],
 		"body": [
-			"int $1 = count($2.begin(), $2.end(), $3);",
+			"int ${3:res} = count($1.begin(), $1.end(), ${2:valval});",
+			"",
 		]
 	},
 	"count_if": {
-		"prefix": "countif_",
+		"prefix": ["countif_","countifx"],
 		"body": [
-			"int $1 = count_if($2.begin(), $2.end(), [](auto x) {",
+			"int ${2:res} = count_if($1.begin(), $1.end(), [](auto x) {",
 			"\tif ($3) return true;",
 			"\treturn false;",
-			"});"
+			"});",
+			""
 		]
 	},
 	"binary": {
@@ -97,61 +110,37 @@
 			"ruiseki"
 		],
 		"body": [
-			"vector<$1> $2;",
-			"partial_sum($3.begin(), $3.end(), back_inserter($2));$4"
+			"vector<${3:LL}> ${2:rui};",
+			"partial_sum($1.begin(), $1.end(), back_inserter($2));",
+			""
+
 		]
 	},
 	"accumulate": {
 		"prefix": "accumulate",
 		"body": [
-			"accumulate($1.begin(), $1.end(), 0LL);"
+			"accumulate($1.begin(), $1.end(), 0LL);",
+			""
 		]
 	},
 	"simple_lambda": {
-		"prefix": "lambda",
+		"prefix": ["lambda"],
 		"body": [
-			"[$1]($2){",
+			"auto ${1:func} = [&]($2){",
 			"\t$3",
-			"}"
+			"};",
+			""
+
 		]
 	},
 	"squash": {
 		"prefix": "squash",
 		"body": [
-			"vector<pair<$1, int> > $2;",
-			"for(auto elem: $3 ){",
+			"vector<pair<${3:LL}, int> > ${2:sq};",
+			"for(auto elem: $1 ){",
 			"\tif($2.empty()||$2.back().first!=elem) $2.emplace_back(make_pair(elem, 0));",
 			"\t$2.back().second++;",
 			"}"
 		]
 	},
-    "bfs" :{
-        "prefix": "vvbfs",
-        "body":[ 
-			"auto bfs_func = [&](int root) {",
-			"  // graph : g",
-			"",
-			"  vector<int> used(g.N, 0);",
-			"  queue<int> qu;",
-			"  qu.push(root);",
-			"  while (!qu.empty()) {",
-			"    int v = qu.front();",
-			"    qu.pop();",
-			"    used[v] = true;",
-			"    for (auto edge : g.vs[v].es) {",
-			"      int u = edge.to;",
-			"      // int w = edge.field; // OPTION",
-			"      if (used[u]) continue;",
-			"      // FROM",
-			"",
-			"      // TO",
-			"      qu.push(u);",
-			"    }",
-			"  }",
-			"};",
-			"bfs_func(0)",
-
-        ]
-
-    },
 }

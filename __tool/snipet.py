@@ -2,7 +2,7 @@ import sys
 import os
 
 
-def main():
+def read_library():
 
     output_format = """
     "{nameA}" :{{
@@ -14,6 +14,7 @@ def main():
     }},
     """
 
+    result = []
     for curDir, dirs, files in os.walk("./library", topdown=False):
         for filename in files:
 
@@ -29,10 +30,27 @@ def main():
                 tmp = line[:-1]
                 tmp = tmp.replace("\"", "\\\"")
                 code += "\t\t\t\"{}\",\n".format(tmp)
-            print(output_format.format(
+            
+            result.append(output_format.format(
                 nameA=name1,
                 nameB=name2,
                 body=code))
+    return result
+
+
+def main():   
+    lib = read_library()
+
+    with open("cpp.json", "r", encoding="utf-8") as stream:
+        data = stream.readlines()
+    for i, line in enumerate(data):
+        if line.find("}") >= 0:
+            insert_pos = i
+    
+    print("".join(data[:insert_pos]))
+    for code in lib:
+        print(code)
+    print("".join(data[insert_pos:]))
 
 
 if __name__ == "__main__":
